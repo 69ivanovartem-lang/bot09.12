@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  server:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server/users.db:/app/users.db
+      - ./server:/app
+    environment:
+      - DB_PATH=/app/users.db
+
+  bot:
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+    depends_on:
+      - server
+    volumes:
+      - ./bot/favorites.json:/app/favorites.json
+      - ./bot/watchlist.json:/app/watchlist.json
+      - ./bot/collections.json:/app/collections.json
+      - ./bot:/app
+    environment:
+      - SERVER_URL=http://server:8000

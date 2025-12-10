@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   server:
-    build: 
+    build:
+     command: uvicorn main:app --host 0.0.0.0 --port 8000
       context: ./server
       dockerfile: Dockerfile
     ports:

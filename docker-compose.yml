@@ -15,7 +15,7 @@ services:
 
   bot:
     build:
-      context: ./bot09.12/Tgb-main
+      context: ./bot09.12/server
       dockerfile: Dockerfile
     depends_on:
       - server
